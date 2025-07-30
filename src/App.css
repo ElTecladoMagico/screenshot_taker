@@ -1,0 +1,287 @@
+/* Custom properties for reusable values */
+:root {
+  --gradient-primary: linear-gradient(135deg, #00416A 0%, #E4E5E6 100%);
+  --glass-background: rgba(255, 255, 255, 0.85);
+  --shadow-primary: rgba(31, 38, 135, 0.37);
+  --glow-color: rgba(74, 144, 226, 0.4);
+}
+
+/* Animated background */
+.whole-page {
+  min-height: 100vh;
+  background: var(--gradient-primary);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating particles effect */
+.whole-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 5px 5px;
+  animation: particleFloat 20s linear infinite;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced title with text effects */
+.screenshot {
+  color: #fff;
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.2);
+  animation: titlePulse 3s ease-in-out infinite;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 20px;
+  perspective: 1000px;
+}
+
+/* Glass morphism cards with hover effects */
+.form {
+  background: var(--glass-background);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 
+    0 8px 32px var(--shadow-primary),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+}
+
+.form:hover {
+  transform: translateY(-10px) rotateX(5deg);
+  box-shadow: 
+    0 15px 35px var(--shadow-primary),
+    0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced input styling */
+.textbox {
+  width: 90%;
+  padding: 12px 16px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.textbox:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 
+    0 0 0 3px var(--glow-color),
+    0 2px 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+/* Animated button with gradient */
+.button {
+  background: linear-gradient(45deg, #4a90e2, #357abd);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+/* Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes titlePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .form-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .screenshot {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .screenshot {
+    font-size: 2.2rem;
+  }
+}
+
+/* Add prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .whole-page,
+  .whole-page::before,
+  .screenshot,
+  .button::before {
+    animation: none;
+  }
+  
+  .form:hover {
+    transform: none;
+  }
+}
+
+
+
+
+
+/**************** Gallery styles ************/
+.gallery-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-title {
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.gallery-empty {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+/***************** Cuota counter *********************/
+.quota {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px;
+  color: white;
+}
